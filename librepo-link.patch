@@ -1,0 +1,10 @@
+--- librepo/librepo/CMakeLists.txt.orig	2014-01-01 16:06:43.000000000 +0100
++++ librepo/librepo/CMakeLists.txt	2014-01-01 16:42:18.009091593 +0100
+@@ -46,6 +46,7 @@
+                         ${CURL_LIBRARY}
+                         ${GPGME_VANILLA_LIBRARIES}
+                         ${GLIB2_LIBRARIES}
++			crypto
+                      )
+ SET_TARGET_PROPERTIES(librepo PROPERTIES OUTPUT_NAME "repo")
+ SET_TARGET_PROPERTIES(librepo PROPERTIES SOVERSION 0)
