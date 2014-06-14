@@ -1,19 +1,19 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-#
+
+%define		gitrev 5585ff7
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.5.0
-%define snap	20131221
-Release:	0.%{snap}.1
+Version:	1.7.3
+Release:	1
 License:	GPL v2+
 Group:		Libraries
+# argh, the latest tagged version is 1.0.0
 #Source0:	https://github.com/Tojaj/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-# argh, the latest tagged version is 1.0.0, while current is 1.5.0
-Source0:	%{name}.tar.xz
-# Source0-md5:	8a2df0be32cdbd2d7cb6124f673c780f
+Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/7f0ee6dae9954982b594efae3cb48517/librepo-%{gitrev}.tar.xz
+# Source0-md5:	7f0ee6dae9954982b594efae3cb48517
 Patch0:		%{name}-link.patch
 URL:		http://tojaj.github.io/librepo/
 BuildRequires:	attr-devel
@@ -21,9 +21,9 @@ BuildRequires:	check-devel
 BuildRequires:	cmake >= 2.6
 BuildRequires:	curl-devel
 %{?with_apidocs:BuildRequires:	doxygen}
+BuildRequires:	expat-devel >= 1.95
 BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	gpgme-devel
-BuildRequires:	expat-devel >= 1.95
 BuildRequires:	openssl-devel
 BuildRequires:	python-devel >= 2
 BuildRequires:	rpmbuild(macros) >= 1.605
