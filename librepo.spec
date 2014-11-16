@@ -2,18 +2,18 @@
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
 
-%define		gitrev 5585ff7
+%define		gitrev 1639724
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.7.3
+Version:	1.7.7
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 # argh, the latest tagged version is 1.0.0
 #Source0:	https://github.com/Tojaj/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/7f0ee6dae9954982b594efae3cb48517/librepo-%{gitrev}.tar.xz
-# Source0-md5:	7f0ee6dae9954982b594efae3cb48517
+Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/904628ef27b512e7aed07a6d41613c87/librepo-%{gitrev}.tar.xz
+# Source0-md5:	904628ef27b512e7aed07a6d41613c87
 Patch0:		%{name}-link.patch
 URL:		http://tojaj.github.io/librepo/
 BuildRequires:	attr-devel
