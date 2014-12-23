@@ -2,18 +2,16 @@
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
 
-%define		gitrev 1639724
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.7.7
+Version:	1.7.11
 Release:	1
 License:	GPL v2+
 Group:		Libraries
-# argh, the latest tagged version is 1.0.0
-#Source0:	https://github.com/Tojaj/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/904628ef27b512e7aed07a6d41613c87/librepo-%{gitrev}.tar.xz
-# Source0-md5:	904628ef27b512e7aed07a6d41613c87
+Source0:	https://github.com/Tojaj/librepo/archive/%{name}-%{version}.tar.gz
+# Source0-md5:	24a7c3dbdaebbf56d704357415e05528
+#Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/904628ef27b512e7aed07a6d41613c87/librepo-%{gitrev}.tar.xz
 Patch0:		%{name}-link.patch
 URL:		http://tojaj.github.io/librepo/
 BuildRequires:	attr-devel
@@ -81,7 +79,7 @@ Python binding for librepo library.
 Wiązanie Pythona do biblioteki librepo.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name}-%{name}-%{version}
 %patch0 -p1
 
 %build
