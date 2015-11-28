@@ -6,7 +6,7 @@ Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
 Version:	1.7.13
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://github.com/Tojaj/librepo/archive/%{name}-%{version}.tar.gz
