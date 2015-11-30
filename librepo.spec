@@ -1,18 +1,22 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
+%bcond_without	python2 # CPython 2.x module
+%bcond_without	python3 # CPython 3.x module
 
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
 Version:	1.7.13
-Release:	4
+Release:	5
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://github.com/Tojaj/librepo/archive/%{name}-%{version}.tar.gz
 # Source0-md5:	e71590f07a38b10c0dfbf857d828b71c
 #Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/904628ef27b512e7aed07a6d41613c87/librepo-%{gitrev}.tar.xz
 Patch0:		%{name}-link.patch
+Patch1:		python-install-dir.patch
+Patch2:		sphinx_executable.patch
 URL:		http://tojaj.github.io/librepo/
 BuildRequires:	attr-devel
 BuildRequires:	check-devel
@@ -23,9 +27,15 @@ BuildRequires:	expat-devel >= 1.95
 BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	gpgme-devel
 BuildRequires:	openssl-devel
-BuildRequires:	python-devel >= 2
 BuildRequires:	rpmbuild(macros) >= 1.605
-%{?with_apidocs:BuildRequires:	sphinx-pdg}
+%if %{with python2}
+BuildRequires:	python-devel >= 1:2
+%{?with_apidocs:BuildRequires:	sphinx-pdg-2}
+%endif
+%if %{with python3}
+BuildRequires:	python3-devel >= 1:3
+%{?with_apidocs:BuildRequires:	sphinx-pdg-3}
+%endif
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -78,19 +88,55 @@ Python binding for librepo library.
 %description -n python-librepo -l pl.UTF-8
 Wiązanie Pythona do biblioteki librepo.
 
+%package -n python3-librepo
+Summary:	Python binding for librepo library
+Summary(pl.UTF-8):	Wiązanie Pythona do biblioteki librepo
+Group:		Libraries/Python
+Requires:	%{name} = %{version}-%{release}
+
+%description -n python3-librepo
+Python binding for librepo library.
+
+%description -n python3-librepo -l pl.UTF-8
+Wiązanie Pythona do biblioteki librepo.
+
 %prep
 %setup -q -n %{name}-%{name}-%{version}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 install -d build
 cd build
-%cmake ..
+%cmake .. \
+%if %{with python2}
+	-DPYTHON_DESIRED=2 \
+	-DPYTHON_INSTALL_DIR="%{py_sitedir}" \
+	-DSPHINX_EXECUTABLE=/usr/bin/sphinx-build-2
+%endif
 
 %{__make}
 
 %if %{with apidocs}
 %{__make} doc
+%endif
+cd ..
+
+%if %{with python3}
+install -d build-py3
+cd build-py3
+%cmake .. \
+	-DPYTHON_DESIRED=3 \
+	-DPYTHON_INSTALL_DIR="%{py3_sitedir}" \
+	-DSPHINX_EXECUTABLE=/usr/bin/sphinx-build-3
+
+%{__make}
+
+%if %{with apidocs}
+%{__make} doc
+%endif
+cd ..
 %endif
 
 %install
@@ -98,6 +144,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%if %{with python3}
+%{__make} -C build-py3 install \
+	DESTDIR=$RPM_BUILD_ROOT
+%endif
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}/librepo
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/librepo
@@ -126,6 +177,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc build/doc/c/html/*
 %endif
 
+%if %{with python2}
 %files -n python-librepo
 %defattr(644,root,root,755)
 %if %{with apidocs}
@@ -134,3 +186,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/librepo
 %attr(755,root,root) %{py_sitedir}/librepo/_librepomodule.so
 %{py_sitedir}/librepo/__init__.py[co]
+%endif
+
+%if %{with python3}
+%files -n python3-librepo
+%defattr(644,root,root,755)
+%if %{with apidocs}
+%doc build-py3/doc/python/{*.html,_sources,_static}
+%endif
+%dir %{py3_sitedir}/librepo
+%attr(755,root,root) %{py3_sitedir}/librepo/_librepo.so
+%{py3_sitedir}/librepo/__init__.py
+%endif

@@ -1,0 +1,21 @@
+diff -dur -x '*~' librepo-librepo-1.7.13.orig/librepo/python/python2/CMakeLists.txt librepo-librepo-1.7.13/librepo/python/python2/CMakeLists.txt
+--- librepo-librepo-1.7.13.orig/librepo/python/python2/CMakeLists.txt	2015-01-23 15:43:51.000000000 +0100
++++ librepo-librepo-1.7.13/librepo/python/python2/CMakeLists.txt	2015-11-30 18:37:49.354123049 +0100
+@@ -1,6 +1,5 @@
+ FIND_PACKAGE (PythonLibs 2 )
+ FIND_PACKAGE (PythonInterp 2 REQUIRED)
+-EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib(True))" OUTPUT_VARIABLE PYTHON_INSTALL_DIR)
+ INCLUDE_DIRECTORIES (${PYTHON_INCLUDE_PATH})
+ 
+ MESSAGE(STATUS "Python install dir is ${PYTHON_INSTALL_DIR}")
+diff -dur -x '*~' librepo-librepo-1.7.13.orig/librepo/python/python3/CMakeLists.txt librepo-librepo-1.7.13/librepo/python/python3/CMakeLists.txt
+--- librepo-librepo-1.7.13.orig/librepo/python/python3/CMakeLists.txt	2015-01-23 15:43:51.000000000 +0100
++++ librepo-librepo-1.7.13/librepo/python/python3/CMakeLists.txt	2015-11-30 18:37:38.354048339 +0100
+@@ -10,7 +10,6 @@
+ 
+ FIND_PACKAGE(PythonLibs 3.0)
+ FIND_PACKAGE(PythonInterp 3.0 REQUIRED)
+-EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib(True))" OUTPUT_VARIABLE PYTHON_INSTALL_DIR)
+ INCLUDE_DIRECTORIES (${PYTHON_INCLUDE_PATH})
+ 
+ MESSAGE(STATUS "Python3 install dir is ${PYTHON_INSTALL_DIR}")
