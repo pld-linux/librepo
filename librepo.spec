@@ -7,17 +7,18 @@
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.7.13
-Release:	5
+Version:	1.7.17
+Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	https://github.com/Tojaj/librepo/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	e71590f07a38b10c0dfbf857d828b71c
+#Source0Download: https://github.com/rpm-software-management/librepo/releases
+Source0:	https://github.com/rpm-software-management/librepo/archive/%{name}-%{version}.tar.gz
+# Source0-md5:	8e3b23e44aab8cd516d2b05d62f6f559
 #Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/904628ef27b512e7aed07a6d41613c87/librepo-%{gitrev}.tar.xz
 Patch0:		%{name}-link.patch
 Patch1:		python-install-dir.patch
 Patch2:		sphinx_executable.patch
-URL:		http://tojaj.github.io/librepo/
+URL:		http://rpm-software-management.github.io/librepo/
 BuildRequires:	attr-devel
 BuildRequires:	check-devel
 BuildRequires:	cmake >= 2.6
