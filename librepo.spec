@@ -78,28 +78,28 @@ API documentation for librepo library.
 Dokumentacja API biblioteki librepo.
 
 %package -n python-librepo
-Summary:	Python binding for librepo library
-Summary(pl.UTF-8):	Wiązanie Pythona do biblioteki librepo
+Summary:	Python 2 binding for librepo library
+Summary(pl.UTF-8):	Wiązanie Pythona 2 do biblioteki librepo
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 
 %description -n python-librepo
-Python binding for librepo library.
+Python 2 binding for librepo library.
 
 %description -n python-librepo -l pl.UTF-8
-Wiązanie Pythona do biblioteki librepo.
+Wiązanie Pythona 2 do biblioteki librepo.
 
 %package -n python3-librepo
-Summary:	Python binding for librepo library
-Summary(pl.UTF-8):	Wiązanie Pythona do biblioteki librepo
+Summary:	Python 3 binding for librepo library
+Summary(pl.UTF-8):	Wiązanie Pythona 3 do biblioteki librepo
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 
 %description -n python3-librepo
-Python binding for librepo library.
+Python 3 binding for librepo library.
 
 %description -n python3-librepo -l pl.UTF-8
-Wiązanie Pythona do biblioteki librepo.
+Wiązanie Pythona 3 do biblioteki librepo.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
