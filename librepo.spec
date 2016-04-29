@@ -8,7 +8,7 @@ Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
 Version:	1.7.17
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
@@ -70,6 +70,9 @@ Pliki nagłówkowe biblioteki librepo.
 Summary:	API documentation for librepo library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki librepo
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for librepo library.
