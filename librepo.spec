@@ -1,19 +1,19 @@
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	apidocs	# doxygen/sphinx API documentation
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.7.17
-Release:	2
+Version:	1.7.18
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
 Source0:	https://github.com/rpm-software-management/librepo/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	8e3b23e44aab8cd516d2b05d62f6f559
+# Source0-md5:	4b28cfad651110b4b033825dc8f8b7cf
 #Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/904628ef27b512e7aed07a6d41613c87/librepo-%{gitrev}.tar.xz
 Patch0:		%{name}-link.patch
 Patch1:		python-install-dir.patch
