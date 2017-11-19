@@ -7,21 +7,19 @@
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.7.18
-Release:	2
+Version:	1.8.1
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
-Source0:	https://github.com/rpm-software-management/librepo/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	4b28cfad651110b4b033825dc8f8b7cf
-#Source0:	http://pkgs.fedoraproject.org/repo/pkgs/librepo/%{name}-%{gitrev}.tar.xz/904628ef27b512e7aed07a6d41613c87/librepo-%{gitrev}.tar.xz
+Source0:	https://github.com/rpm-software-management/librepo/archive/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	01fe130eb421580d62e97e4991e94df7
 Patch0:		%{name}-link.patch
-Patch1:		python-install-dir.patch
+Patch1:		%{name}-attr.patch
 Patch2:		sphinx_executable.patch
 URL:		http://rpm-software-management.github.io/librepo/
-BuildRequires:	attr-devel
 BuildRequires:	check-devel
-BuildRequires:	cmake >= 2.6
+BuildRequires:	cmake >= 2.8.5
 BuildRequires:	curl-devel
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	expat-devel >= 1.95
@@ -105,7 +103,7 @@ Python 3 binding for librepo library.
 Wiązanie Pythona 3 do biblioteki librepo.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1

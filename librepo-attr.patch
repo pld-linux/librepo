@@ -1,0 +1,45 @@
+--- librepo-1.8.1/librepo/checksum.c.orig	2017-09-01 17:45:17.000000000 +0200
++++ librepo-1.8.1/librepo/checksum.c	2017-11-19 08:09:39.084533788 +0100
+@@ -26,7 +26,8 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+-#include <attr/xattr.h>
++#include <errno.h>
++#include <sys/xattr.h>
+ #include <openssl/evp.h>
+ 
+ #include "cleanup.h"
+--- librepo-1.8.1/librepo/downloader.c.orig	2017-09-01 17:45:17.000000000 +0200
++++ librepo-1.8.1/librepo/downloader.c	2017-11-19 08:11:38.764532423 +0100
+@@ -30,7 +30,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <curl/curl.h>
+-#include <attr/xattr.h>
++#include <sys/xattr.h>
+ 
+ #include "downloader.h"
+ #include "downloader_internal.h"
+--- librepo-1.8.1/tests/test_checksum.c.orig	2017-09-01 17:45:17.000000000 +0200
++++ librepo-1.8.1/tests/test_checksum.c	2017-11-19 08:12:19.011198628 +0100
+@@ -6,7 +6,8 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+-#include <attr/xattr.h>
++#include <errno.h>
++#include <sys/xattr.h>
+ 
+ #include "librepo/util.h"
+ #include "librepo/checksum.h"
+--- librepo-1.8.1/CMakeLists.txt.orig	2017-09-01 17:45:17.000000000 +0200
++++ librepo-1.8.1/CMakeLists.txt	2017-11-19 08:12:38.604531738 +0100
+@@ -32,7 +32,6 @@
+ FIND_PACKAGE(EXPAT REQUIRED)
+ FIND_PACKAGE(CURL REQUIRED)
+ FIND_PACKAGE(Gpgme REQUIRED)
+-FIND_PACKAGE(Xattr REQUIRED)
+ 
+ INCLUDE_DIRECTORIES(${GLIB2_INCLUDE_DIRS})
+ 
