@@ -68,9 +68,7 @@ Pliki nagłówkowe biblioteki librepo.
 Summary:	API documentation for librepo library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki librepo
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for librepo library.
