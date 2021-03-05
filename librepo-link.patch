@@ -1,7 +1,8 @@
---- librepo/librepo/CMakeLists.txt.orig	2014-01-01 16:06:43.000000000 +0100
-+++ librepo/librepo/CMakeLists.txt	2014-01-01 16:42:18.009091593 +0100
-@@ -46,6 +46,7 @@
-                         ${CURL_LIBRARY}
+diff -urNp -x '*.orig' librepo-1.8.1.org/librepo/CMakeLists.txt librepo-1.8.1/librepo/CMakeLists.txt
+--- librepo-1.8.1.org/librepo/CMakeLists.txt	2017-09-01 17:45:17.000000000 +0200
++++ librepo-1.8.1/librepo/CMakeLists.txt	2021-03-05 22:44:35.021105057 +0100
+@@ -52,6 +52,7 @@ TARGET_LINK_LIBRARIES(librepo
+                         ${LIBCRYPTO_LIBRARIES}
                          ${GPGME_VANILLA_LIBRARIES}
                          ${GLIB2_LIBRARIES}
 +			crypto

@@ -1,6 +1,6 @@
-diff -dur librepo-librepo-1.7.13.orig/doc/python/CMakeLists.txt librepo-librepo-1.7.13/doc/python/CMakeLists.txt
---- librepo-librepo-1.7.13.orig/doc/python/CMakeLists.txt	2015-01-23 15:43:51.000000000 +0100
-+++ librepo-librepo-1.7.13/doc/python/CMakeLists.txt	2015-11-30 18:48:12.275656366 +0100
+diff -urNp -x '*.orig' librepo-1.8.1.org/doc/python/CMakeLists.txt librepo-1.8.1/doc/python/CMakeLists.txt
+--- librepo-1.8.1.org/doc/python/CMakeLists.txt	2017-09-01 17:45:17.000000000 +0200
++++ librepo-1.8.1/doc/python/CMakeLists.txt	2021-03-05 22:44:35.207770924 +0100
 @@ -1,5 +1,5 @@
  ADD_CUSTOM_TARGET (doc-python
 -    PYTHONPATH=${CMAKE_BINARY_DIR}/librepo/python/python${PYTHON_DESIRED} sphinx-build -E -b html
