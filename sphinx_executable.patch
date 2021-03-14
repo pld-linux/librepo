@@ -3,8 +3,8 @@ diff -urNp -x '*.orig' librepo-1.8.1.org/doc/python/CMakeLists.txt librepo-1.8.1
 +++ librepo-1.8.1/doc/python/CMakeLists.txt	2021-03-05 22:44:35.207770924 +0100
 @@ -1,5 +1,5 @@
  ADD_CUSTOM_TARGET (doc-python
--    PYTHONPATH=${CMAKE_BINARY_DIR}/librepo/python/python${PYTHON_DESIRED} sphinx-build -E -b html
-+	PYTHONPATH=${CMAKE_BINARY_DIR}/librepo/python/python${PYTHON_DESIRED} ${SPHINX_EXECUTABLE} -E -b html
+-    PYTHONPATH=${CMAKE_BINARY_DIR}/librepo/python/ sphinx-build -E -b html
++    PYTHONPATH=${CMAKE_BINARY_DIR}/librepo/python/ ${SPHINX_EXECUTABLE} -E -b html
                    ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
                    COMMENT "Building Python API documentation with Sphinx")
  

@@ -1,21 +1,19 @@
 #
 # Conditional build:
 %bcond_without	apidocs	# doxygen/sphinx API documentation
-%bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.8.1
-Release:	6
+Version:	1.13.0
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
 Source0:	https://github.com/rpm-software-management/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	01fe130eb421580d62e97e4991e94df7
+# Source0-md5:	52dd2f4d9108a92f221bde3279bb75f1
 Patch0:		%{name}-link.patch
-Patch1:		%{name}-attr.patch
 Patch2:		sphinx_executable.patch
 URL:		http://rpm-software-management.github.io/librepo/
 BuildRequires:	check-devel
@@ -27,15 +25,12 @@ BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	gpgme-devel
 BuildRequires:	openssl-devel
 BuildRequires:	rpmbuild(macros) >= 1.605
-%if %{with python2}
-BuildRequires:	python-devel >= 1:2
-%{?with_apidocs:BuildRequires:	sphinx-pdg-2}
-%endif
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3
 %{?with_apidocs:BuildRequires:	sphinx-pdg-3}
 %endif
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	zchunk-devel >= 0.9.11
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -76,18 +71,6 @@ API documentation for librepo library.
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki librepo.
 
-%package -n python-librepo
-Summary:	Python 2 binding for librepo library
-Summary(pl.UTF-8):	Wiązanie Pythona 2 do biblioteki librepo
-Group:		Libraries/Python
-Requires:	%{name} = %{version}-%{release}
-
-%description -n python-librepo
-Python 2 binding for librepo library.
-
-%description -n python-librepo -l pl.UTF-8
-Wiązanie Pythona 2 do biblioteki librepo.
-
 %package -n python3-librepo
 Summary:	Python 3 binding for librepo library
 Summary(pl.UTF-8):	Wiązanie Pythona 3 do biblioteki librepo
@@ -103,40 +86,22 @@ Wiązanie Pythona 3 do biblioteki librepo.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 
 %build
 install -d build
 cd build
 %cmake .. \
-%if %{with python2}
-	-DPYTHON_DESIRED=2 \
-	-DPYTHON_INSTALL_DIR="%{py_sitedir}" \
-	-DSPHINX_EXECUTABLE=/usr/bin/sphinx-build-2
-%endif
-
-%{__make}
-
-%if %{with apidocs}
-%{__make} doc
-%endif
-cd ..
-
 %if %{with python3}
-install -d build-py3
-cd build-py3
-%cmake .. \
 	-DPYTHON_DESIRED=3 \
 	-DPYTHON_INSTALL_DIR="%{py3_sitedir}" \
 	-DSPHINX_EXECUTABLE=/usr/bin/sphinx-build-3
+%endif
 
 %{__make}
 
 %if %{with apidocs}
 %{__make} doc
-%endif
-cd ..
 %endif
 
 %install
@@ -144,15 +109,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-%if %{with python3}
-%{__make} -C build-py3 install \
-	DESTDIR=$RPM_BUILD_ROOT
-%endif
-
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}/librepo
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/librepo
-%py_postclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -177,22 +133,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc build/doc/c/html/*
 %endif
 
-%if %{with python2}
-%files -n python-librepo
-%defattr(644,root,root,755)
-%if %{with apidocs}
-%doc build/doc/python/{*.html,_sources,_static}
-%endif
-%dir %{py_sitedir}/librepo
-%attr(755,root,root) %{py_sitedir}/librepo/_librepomodule.so
-%{py_sitedir}/librepo/__init__.py[co]
-%endif
-
 %if %{with python3}
 %files -n python3-librepo
 %defattr(644,root,root,755)
 %if %{with apidocs}
-%doc build-py3/doc/python/{*.html,_sources,_static}
+%doc build/doc/python/{*.html,_sources,_static}
 %endif
 %dir %{py3_sitedir}/librepo
 %attr(755,root,root) %{py3_sitedir}/librepo/_librepo.so
