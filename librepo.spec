@@ -4,7 +4,7 @@
 %bcond_without	python3 # CPython 3.x module
 
 Summary:	Library for downloading Linux repository metadata and packages
-Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
+Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów oraz pakietów dla Linuksa
 Name:		librepo
 Version:	1.14.2
 Release:	1
