@@ -24,6 +24,7 @@ BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	gpgme-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openssl-devel
+BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
 %if %{with python3}
@@ -87,6 +88,18 @@ Python 3 binding for librepo library.
 %description -n python3-librepo -l pl.UTF-8
 Wiązanie Pythona 3 do biblioteki librepo.
 
+%package -n python3-librepo-apidocs
+Summary:	API documentation for Python librepo binding
+Summary(pl.UTF-8):	Dokumentacja API do wiązań Pythona do librepo
+Group:		Documentation
+BuildArch:	noarch
+
+%description -n python3-librepo-apidocs
+API documentation for Python librepo binding.
+
+%description -n python3-librepo-apidocs -l pl.UTF-8
+Dokumentacja API do wiązań Pythona do librepo.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -114,6 +127,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with python3}
+%py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
+%endif
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -140,10 +158,14 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-librepo
 %defattr(644,root,root,755)
-%if %{with apidocs}
-%doc build/doc/python/{_static,*.html,*.js}
-%endif
 %dir %{py3_sitedir}/librepo
 %attr(755,root,root) %{py3_sitedir}/librepo/_librepo.so
 %{py3_sitedir}/librepo/__init__.py
+%{py3_sitedir}/librepo/__pycache__
+
+%if %{with apidocs}
+%files -n python3-librepo-apidocs
+%defattr(644,root,root,755)
+%doc build/doc/python/{_static,*.html,*.js}
+%endif
 %endif
