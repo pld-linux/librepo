@@ -6,24 +6,25 @@
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów roaz pakietów dla Linuksa
 Name:		librepo
-Version:	1.13.0
-Release:	3
+Version:	1.14.2
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
 Source0:	https://github.com/rpm-software-management/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	52dd2f4d9108a92f221bde3279bb75f1
+# Source0-md5:	2c59bca44b3fb67e0af70968ca0b095c
 Patch0:		%{name}-link.patch
 Patch2:		sphinx_executable.patch
 URL:		http://rpm-software-management.github.io/librepo/
 BuildRequires:	check-devel
 BuildRequires:	cmake >= 2.8.5
-BuildRequires:	curl-devel
+BuildRequires:	curl-devel >= 7.52
 %{?with_apidocs:BuildRequires:	doxygen}
-BuildRequires:	expat-devel >= 1.95
 BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	gpgme-devel
+BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openssl-devel
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3
@@ -32,6 +33,8 @@ BuildRequires:	python3-devel >= 1:3
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	zchunk-devel >= 0.9.11
 BuildRequires:	xz
+Requires:	curl-libs >= 7.52
+Requires:	zchunk-libs >= 0.9.11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,11 +50,12 @@ Summary:	Header files for librepo library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki librepo
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	curl-devel
-Requires:	expat-devel >= 1.95
+Requires:	curl-devel >= 7.52
 Requires:	glib2-devel >= 2.0
 Requires:	gpgme-devel
+Requires:	libxml2-devel >= 2.0
 Requires:	openssl-devel
+Requires:	zchunk-devel >= 0.9.11
 
 %description devel
 Header files for librepo library.
@@ -137,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-librepo
 %defattr(644,root,root,755)
 %if %{with apidocs}
-%doc build/doc/python/{*.html,_sources,_static}
+%doc build/doc/python/{_static,*.html,*.js}
 %endif
 %dir %{py3_sitedir}/librepo
 %attr(755,root,root) %{py3_sitedir}/librepo/_librepo.so
