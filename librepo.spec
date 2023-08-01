@@ -27,7 +27,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	rpmbuild(macros) >= 1.742
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3
 %{?with_apidocs:BuildRequires:	sphinx-pdg-3}
@@ -112,6 +112,7 @@ Dokumentacja API do wiązań Pythona do librepo.
 install -d build
 cd build
 %cmake .. \
+	%{cmake_on_off apidocs ENABLE_DOCS} \
 %if %{with python3}
 	-DPYTHON_DESIRED=3 \
 	-DPYTHON_INSTALL_DIR="%{py3_sitedir}" \
