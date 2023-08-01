@@ -30,6 +30,7 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.742
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3
+BuildRequires:	python3-modules >= 1:3
 %{?with_apidocs:BuildRequires:	sphinx-pdg-3}
 %endif
 BuildRequires:	tar >= 1:1.22
