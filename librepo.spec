@@ -6,13 +6,13 @@
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów oraz pakietów dla Linuksa
 Name:		librepo
-Version:	1.15.2
+Version:	1.16.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
 Source0:	https://github.com/rpm-software-management/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	98273734f508e64f3a4a628fa0cd13ef
+# Source0-md5:	96162be49af5fb8bface13e273cbde4c
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-gpgme-pkgconfig.patch
 Patch2:		sphinx_executable.patch
