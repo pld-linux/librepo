@@ -6,13 +6,13 @@
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów oraz pakietów dla Linuksa
 Name:		librepo
-Version:	1.17.2
+Version:	1.18.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
 Source0:	https://github.com/rpm-software-management/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	135db5b703364c66f0649c82d5d8ac9d
+# Source0-md5:	e33261fe05dd8beea6fd97c3ff3def48
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-gpgme-pkgconfig.patch
 Patch2:		sphinx_executable.patch
@@ -22,6 +22,7 @@ BuildRequires:	cmake >= 2.8.5
 BuildRequires:	curl-devel >= 7.52
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	glib2-devel >= 1:2.66
+# can also use rpm (>= 4.19.0) for PGP operations
 BuildRequires:	gpgme-devel
 BuildRequires:	libselinux-devel
 BuildRequires:	libxml2-devel >= 2.0
