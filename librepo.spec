@@ -7,7 +7,7 @@ Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów oraz pakietów dla Linuksa
 Name:		librepo
 Version:	1.18.1
-Release:	
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
@@ -36,8 +36,8 @@ BuildRequires:	python3-modules >= 1:3
 %{?with_apidocs:BuildRequires:	sphinx-pdg-3}
 %endif
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	zchunk-devel >= 0.9.11
 BuildRequires:	xz
+BuildRequires:	zchunk-devel >= 0.9.11
 Requires:	curl-libs >= 7.52
 Requires:	glib2 >= 1:2.66
 Requires:	zchunk-libs >= 0.9.11
@@ -107,9 +107,9 @@ Dokumentacja API do wiązań Pythona do librepo.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 
 %build
 install -d build
