@@ -6,14 +6,13 @@
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów oraz pakietów dla Linuksa
 Name:		librepo
-Version:	1.18.1
-Release:	4
+Version:	1.20.0
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
 Source0:	https://github.com/rpm-software-management/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	e33261fe05dd8beea6fd97c3ff3def48
-Patch0:		%{name}-link.patch
+# Source0-md5:	0a9c8dec0890caf67f96a680fb74ea15
 Patch1:		%{name}-gpgme-pkgconfig.patch
 Patch2:		sphinx_executable.patch
 URL:		http://rpm-software-management.github.io/librepo/
@@ -29,7 +28,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.742
+BuildRequires:	rpmbuild(macros) >= 2.047
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3
 BuildRequires:	python3-modules >= 1:3
@@ -107,7 +106,6 @@ Dokumentacja API do wiązań Pythona do librepo.
 
 %prep
 %setup -q
-%patch -P 0 -p1
 %patch -P 1 -p1
 %patch -P 2 -p1
 
@@ -115,7 +113,7 @@ Dokumentacja API do wiązań Pythona do librepo.
 install -d build
 cd build
 %cmake .. \
-	%{cmake_on_off apidocs ENABLE_DOCS} \
+	-DENABLE_DOCS=%{__ON_OFF apidocs} \
 %if %{with python3}
 	-DPYTHON_DESIRED=3 \
 	-DPYTHON_INSTALL_DIR="%{py3_sitedir}" \
