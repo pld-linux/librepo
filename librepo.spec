@@ -6,13 +6,13 @@
 Summary:	Library for downloading Linux repository metadata and packages
 Summary(pl.UTF-8):	Biblioteka do pobierania metadanych repozytoriów oraz pakietów dla Linuksa
 Name:		librepo
-Version:	1.20.0
+Version:	1.21.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/rpm-software-management/librepo/releases
 Source0:	https://github.com/rpm-software-management/librepo/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	0a9c8dec0890caf67f96a680fb74ea15
+# Source0-md5:	c6a70ac38545776fe2a36849427e887c
 Patch1:		%{name}-gpgme-pkgconfig.patch
 Patch2:		sphinx_executable.patch
 URL:		http://rpm-software-management.github.io/librepo/
@@ -146,11 +146,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md
-%attr(755,root,root) %{_libdir}/librepo.so.0
+%{_libdir}/librepo.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/librepo.so
+%{_libdir}/librepo.so
 %{_includedir}/librepo
 %{_pkgconfigdir}/librepo.pc
 
@@ -164,7 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-librepo
 %defattr(644,root,root,755)
 %dir %{py3_sitedir}/librepo
-%attr(755,root,root) %{py3_sitedir}/librepo/_librepo.so
+%{py3_sitedir}/librepo/_librepo.so
 %{py3_sitedir}/librepo/__init__.py
 %{py3_sitedir}/librepo/__pycache__
 
